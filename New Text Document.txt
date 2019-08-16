@@ -1,0 +1,10 @@
+freehosting.com
+freehostia.com
+1freehosting.com
+hetltohost.com
+
+
+$mysql_host = "mysql9.000webhost.com";
+$mysql_database = "a6611533_pres";
+$mysql_user = "a6611533_pres";
+$mysql_password = "z41210756";   000webhost

@@ -1,0 +1,77 @@
+----------------------------tipo documento consultar----------
+create procedure TIPO_DOCUMENTO_CONSULTAR()
+select NombreTipoDocumento from tipodocumento
+
+--------------------------------------------------------------
+
+
+----------------------------perfil ----------
+DELIMITER ;;
+CREATE  PROCEDURE PERFIL_CLIENTE_CONSULTAR(IN tipo VARCHAR(1), IN nom VARCHAR(20), IN id INT)
+BEGIN
+   IF  tipo = '0' THEN 
+SELECT NombrePerfil from perfil ;
+END IF;
+  
+
+END;;
+
+
+
+--------------------------------------------------------------
+
+
+
+----------------------------usuario ----------
+
+
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USUARIO_INSERTAR`(IN `login` VARCHAR(20), IN `pass` VARCHAR(20), IN `nom` VARCHAR(20),
+ IN `ape` VARCHAR(20), IN `nomidtipo` VARCHAR(20), IN `doc` VARCHAR(20), IN `tel` VARCHAR(20), IN `correo` VARCHAR(40), IN `nomperfil` VARCHAR(20),
+ IN `dirusu` VARCHAR(50))
+Insert into usuario(LoginUsuario,PasswordUsuario,NombreUsuario,ApellidoUsuario,IdTipoDocumento,DocumentoUsuario,TelefonoUsuario,DireccionUsuario,
+CorreoUsuario,IdPerfil) 
+values(login,pass,nom,ape,(Select IdTipoDocumento from tipodocumento where NombreTipoDocumento=nomidtipo),doc,tel,dirusu,correo,
+(Select IdPerfil from perfil where NombrePerfil=nomperfil))
+END;;
+
+DELIMITER ;;
+CREATE  PROCEDURE USUARIO_ELIMINAR(IN id int )
+delete from usuario where IdUsuario=id;
+END;;
+
+
+DELIMITER ;;
+CREATE DEFINER PROCEDURE USUARIO_ACTUALIZAR`(IN id INT, IN login VARCHAR(20), IN pass VARCHAR(20), IN nom VARCHAR(20),
+ IN ape VARCHAR(20), IN nomidtipo VARCHAR(20), IN doc VARCHAR(20), IN tel VARCHAR(20), IN correo VARCHAR(40), IN nomperfil VARCHAR(20),
+ IN dirusu VARCHAR(50))
+
+BEGIN
+  
+    UPDATE  usuario
+	SET 	    LoginUsuario    	 = login,	    	
+                    PasswordUsuario    	 = nom,
+		    NombreUsuario	 = ape,
+		    ApellidoUsuario	 = ape,
+		    IdTipoDocumento  	 = nomidtipo,
+		    DocumentoUsuario     = doc,
+		    TelefonoUsuario      = tel,
+		    DireccionUsuario     = dirusu,
+	            CorreoUsuario 	 = correo,
+		    IdPerfil		 = nomperfil
+
+	WHERE	IdUsuario    		      = id;
+   
+END$$
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------cliente---------------------------------------------------------------------------------
+CREATE PROCEDURE CLIENTE_INSERTAR(
+IN nom Varchar(20),IN ape VARCHAR(20),IN nomidtipo VARCHAR(20),IN numero VARCHAR(20),
+IN dir VARCHAR(50),IN bar VARCHAR(20),IN tel VARCHAR(20),IN ema VARCHAR(50),IN idusu INT)
+
+Insert into cliente(NombreCliente,ApellidoCliente,IdTipoDocumento,DocumentoCliente,DireccionCliente,
+BarrioCliente,TelefonoCliente,EmailCliente,IdUsuario) 
+values(nom,ape,(Select IdTipoDocumento from tipodocumento where NombreTipoDocumento=nomidtipo)
+,numero,dir,bar,tel,ema,idusu)

@@ -1,0 +1,2244 @@
+USE [SVK]
+GO
+/****** Object:  Table [dbo].[PROVEEDOR]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PROVEEDOR](
+	[IdProveedor] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombreProveedor] [nvarchar](50) NOT NULL,
+	[DireccionProveedor] [nvarchar](50) NULL,
+	[TelefonoProveedor] [bigint] NULL,
+	[CelularProveedor] [bigint] NULL,
+	[NombreContacto] [nvarchar](50) NULL,
+	[CelularContacto] [bigint] NULL,
+	[NitProveedor] [nchar](10) NULL,
+ CONSTRAINT [PK_PROVEEDOR] PRIMARY KEY CLUSTERED 
+(
+	[IdProveedor] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id de la tabla Proveedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'IdProveedor'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del proveedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'NombreProveedor'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Dirección proveedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'DireccionProveedor'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de Teléfono proveedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'TelefonoProveedor'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de celular proveedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'CelularProveedor'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del contacto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'NombreContacto'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de celular del contacto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'CelularContacto'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de nit del proveedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PROVEEDOR', @level2type=N'COLUMN',@level2name=N'NitProveedor'
+GO
+/****** Object:  Table [dbo].[PRODUCTOS_FACTURA]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PRODUCTOS_FACTURA](
+	[IdProductosxFactura] [int] IDENTITY(1,1) NOT NULL,
+	[IdFactura] [int] NOT NULL,
+	[IdProducto] [int] NOT NULL,
+	[CantidadProducto] [int] NULL,
+	[SubTotal] [int] NULL,
+	[COMBO] [nchar](3) NULL,
+	[DESCUENTO] [nchar](3) NULL,
+ CONSTRAINT [PK_PRODUCTOS_FACTURA] PRIMARY KEY CLUSTERED 
+(
+	[IdProductosxFactura] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Campo principal de la tabla.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTOS_FACTURA', @level2type=N'COLUMN',@level2name=N'IdProductosxFactura'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id de la factura.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTOS_FACTURA', @level2type=N'COLUMN',@level2name=N'IdFactura'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del Producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTOS_FACTURA', @level2type=N'COLUMN',@level2name=N'IdProducto'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cantidad de producto especifico' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTOS_FACTURA', @level2type=N'COLUMN',@level2name=N'CantidadProducto'
+GO
+/****** Object:  Table [dbo].[PERFIL]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PERFIL](
+	[IdPerfil] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombrePerfil] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_PERFIL] PRIMARY KEY CLUSTERED 
+(
+	[IdPerfil] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id de la tabla Perfil.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PERFIL', @level2type=N'COLUMN',@level2name=N'IdPerfil'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del Perfil.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PERFIL', @level2type=N'COLUMN',@level2name=N'NombrePerfil'
+GO
+/****** Object:  Table [dbo].[FACTURA]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[FACTURA](
+	[IdFactura] [int] IDENTITY(1,1) NOT NULL,
+	[NumeroFactura] [nvarchar](20) NOT NULL,
+	[IdPuntoVenta] [smallint] NOT NULL,
+	[CantidadProductos] [smallint] NOT NULL,
+	[ValorTotal] [money] NOT NULL,
+	[IdCliente] [int] NOT NULL,
+	[ValorIVA] [int] NULL,
+	[FechaHoraFactura] [datetime] NULL,
+	[Observaciones] [varchar](300) NULL,
+	[devolucion] [nchar](1) NULL,
+ CONSTRAINT [PK_FACTURA] PRIMARY KEY CLUSTERED 
+(
+	[IdFactura] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id principal de la tabla.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'IdFactura'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Numero fisico de la factura.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'NumeroFactura'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del punto de venta.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'IdPuntoVenta'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cantidad de productos.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'CantidadProductos'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Valor total de la factura.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'ValorTotal'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del cliente.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'IdCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Valor con IVA' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'ValorIVA'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Fecha y hora de la factura.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'FechaHoraFactura'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Observaciones de la factura.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'FACTURA', @level2type=N'COLUMN',@level2name=N'Observaciones'
+GO
+/****** Object:  Table [dbo].[MARCA]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MARCA](
+	[IdMarca] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombreMarca] [nvarchar](50) NOT NULL,
+	[NumeroReferencia] [nvarchar](15) NULL,
+ CONSTRAINT [PK_MARCA] PRIMARY KEY CLUSTERED 
+(
+	[IdMarca] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id principal de la tabla Marca.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'MARCA', @level2type=N'COLUMN',@level2name=N'IdMarca'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre de la marca.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'MARCA', @level2type=N'COLUMN',@level2name=N'NombreMarca'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Numero de referencia.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'MARCA', @level2type=N'COLUMN',@level2name=N'NumeroReferencia'
+GO
+/****** Object:  Table [dbo].[CIUDAD]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CIUDAD](
+	[IdCiudad] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombreCiudad] [nvarchar](50) NOT NULL,
+	[AbreviaturaCiudad] [nchar](4) NULL,
+ CONSTRAINT [PK_CIUDAD] PRIMARY KEY CLUSTERED 
+(
+	[IdCiudad] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id ciudad.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CIUDAD', @level2type=N'COLUMN',@level2name=N'IdCiudad'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre de la ciudad.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CIUDAD', @level2type=N'COLUMN',@level2name=N'NombreCiudad'
+GO
+/****** Object:  Table [dbo].[REGISTRO_FACTURA]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[REGISTRO_FACTURA](
+	[IdRegistroFactura] [bigint] IDENTITY(1,1) NOT NULL,
+	[NumeroFactura] [nchar](20) NOT NULL,
+	[NumeroReferencia] [nchar](15) NOT NULL,
+	[NombreProducto] [nchar](100) NOT NULL,
+	[Cantidadllevar] [int] NOT NULL,
+	[SubTotal] [int] NOT NULL,
+	[ValorTotal] [money] NOT NULL,
+	[ValorIva] [int] NOT NULL,
+	[FechaHora] [datetime] NULL,
+	[NombreCliente] [nchar](50) NOT NULL,
+	[Documento] [nchar](50) NOT NULL,
+	[PuntoVenta] [nchar](50) NOT NULL,
+	[NombreCiudad] [nchar](50) NOT NULL,
+ CONSTRAINT [PK_Registro_Factura] PRIMARY KEY CLUSTERED 
+(
+	[IdRegistroFactura] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TIPO_CLIENTE]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TIPO_CLIENTE](
+	[IdTipoCliente] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombreTipoCliente] [nchar](20) NULL,
+ CONSTRAINT [PK_TIPO_CLIENTE] PRIMARY KEY CLUSTERED 
+(
+	[IdTipoCliente] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id de la tabla Tipo de cliente.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TIPO_CLIENTE', @level2type=N'COLUMN',@level2name=N'IdTipoCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del Tipo de cliente.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TIPO_CLIENTE', @level2type=N'COLUMN',@level2name=N'NombreTipoCliente'
+GO
+/****** Object:  Table [dbo].[TIPO_PRODUCTO]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TIPO_PRODUCTO](
+	[IdTipoProducto] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombreTipoProducto] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_TIPO_PRODUCTO] PRIMARY KEY CLUSTERED 
+(
+	[IdTipoProducto] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del tipo de producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TIPO_PRODUCTO', @level2type=N'COLUMN',@level2name=N'IdTipoProducto'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del tipo de producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TIPO_PRODUCTO', @level2type=N'COLUMN',@level2name=N'NombreTipoProducto'
+GO
+/****** Object:  Table [dbo].[TIPO_DOCUMENTO]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TIPO_DOCUMENTO](
+	[IdTipoDocumento] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombreTipoDocumento] [nvarchar](30) NOT NULL,
+ CONSTRAINT [PK_TIPO_DOCUMENTO] PRIMARY KEY CLUSTERED 
+(
+	[IdTipoDocumento] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id principal de la tabla tipo de documento.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TIPO_DOCUMENTO', @level2type=N'COLUMN',@level2name=N'IdTipoDocumento'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del tipo de documento.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TIPO_DOCUMENTO', @level2type=N'COLUMN',@level2name=N'NombreTipoDocumento'
+GO
+/****** Object:  StoredProcedure [dbo].[TIQUETE_DATOS_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[TIQUETE_DATOS_CONSULTAR]
+@NUMERO NCHAR(20) 
+
+	
+AS
+BEGIN
+		
+		
+				SELECT	F.NumeroFactura,F.FechaHoraFactura,F.ValorTotal
+				FROM FACTURA F WHERE F.NumeroFactura=@NUMERO;
+		
+				
+END
+GO
+/****** Object:  StoredProcedure [dbo].[TIPO_PRODUCTO_INSERTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[TIPO_PRODUCTO_INSERTAR]
+@NOMBRE        NCHAR(50)
+
+
+AS
+BEGIN
+	INSERT INTO [dbo].[TIPO_PRODUCTO](NombreTipoProducto) 
+			VALUES(@NOMBRE);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[TIPO_PRODUCTO_ELIMINAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE  PROCEDURE [dbo].[TIPO_PRODUCTO_ELIMINAR]
+	@ID INT
+AS
+BEGIN
+		DELETE FROM [dbo].[TIPO_PRODUCTO]
+		WHERE IdTipoProducto = @ID;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[TIPO_PRODUCTO_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[TIPO_PRODUCTO_CONSULTAR]
+@TipoConsulta INT,
+@NOMBRE NCHAR(50)
+
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT	NombreTipoProducto
+						
+				FROM	[TIPO_PRODUCTO] WITH (NOLOCK)
+			
+		END
+		--CONSULTA ID
+		IF @TipoConsulta = 1
+			BEGIN
+			SELECT	IdTipoProducto
+						
+				FROM	[TIPO_PRODUCTO] WITH (NOLOCK)
+			WHERE NombreTipoProducto=@NOMBRE;
+		END
+		
+END
+GO
+/****** Object:  StoredProcedure [dbo].[TIPO_PRODUCTO_ACTUALIZAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[TIPO_PRODUCTO_ACTUALIZAR]
+@TipoActualizacion INT,
+@NOMBRE        NCHAR(50),
+@ID				INT
+		
+	
+AS
+BEGIN
+		IF @TipoActualizacion = 1
+			BEGIN
+				UPDATE [TIPO_PRODUCTO] 
+				SET		NombreTipoProducto				= @NOMBRE
+						
+						
+				WHERE	IdTipoProducto			= @ID;
+
+				
+			END
+			
+			
+			
+END
+GO
+/****** Object:  StoredProcedure [dbo].[TIPO_CLIENTE_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[TIPO_CLIENTE_CONSULTAR]
+
+
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		
+			
+				SELECT	NombreTipoCliente
+						
+				FROM	[TIPO_CLIENTE] WITH (NOLOCK)
+			
+		
+		
+END
+GO
+/****** Object:  StoredProcedure [dbo].[TIPO_DOCUMENTO_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[TIPO_DOCUMENTO_CONSULTAR]
+
+
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		
+			
+				SELECT	NombreTipoDocumento
+						
+				FROM	[TIPO_DOCUMENTO] WITH (NOLOCK)
+			
+		
+		
+END
+GO
+/****** Object:  StoredProcedure [dbo].[REGISTRO_FACTURA_INSERTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[REGISTRO_FACTURA_INSERTAR]
+@NUMFAC        NCHAR(20),
+@REFERENCIA     NCHAR(15),
+@PRODUCTO	   NCHAR(100),
+@CAN			INT,
+@SUB           INT,
+@TOTAL        MONEY,
+@IVA            INT,
+@FECHA         datetime,
+@CLI			NCHAR(50),
+@DOC            NCHAR(50),
+@PUNTO			NCHAR(50),
+@CIUDAD			NCHAR(50)
+
+AS
+BEGIN
+	INSERT INTO [dbo].[REGISTRO_FACTURA]( NumeroFactura,NumeroReferencia,NombreProducto,
+											Cantidadllevar,SubTotal,ValorTotal,ValorIva,FechaHora,
+												NombreCliente,Documento,PuntoVenta,NombreCiudad) 
+			VALUES(@NUMFAC,@REFERENCIA,@PRODUCTO,@CAN,@SUB,@TOTAL,@IVA,convert(datetime, @FECHA, 113),@CLI,@DOC,@PUNTO,@CIUDAD);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[REGISTRO_FACTURA_ELIMINAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[REGISTRO_FACTURA_ELIMINAR]
+	@NOMBRE VARCHAR(10) = ''
+AS
+BEGIN
+		DELETE FROM [dbo].[REGISTRO_FACTURA]
+		
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PERFIL_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PERFIL_CONSULTAR]
+@TipoConsulta INT,
+@PERFIL NCHAR(50)
+
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+			
+				SELECT	NombrePerfil
+						
+				FROM	[PERFIL]
+				 WITH (NOLOCK)
+			END
+		
+		
+END
+GO
+/****** Object:  StoredProcedure [dbo].[FACTURA_ACTUALIZAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[FACTURA_ACTUALIZAR]
+@NUMEROFAC        NCHAR(20),
+@DEVOLUCION       NCHAR(2)
+AS
+BEGIN
+	UPDATE [FACTURA] 
+				SET		devolucion			= @DEVOLUCION
+						
+						
+						
+						
+						
+						
+				WHERE	NumeroFactura				= @NUMEROFAC;
+
+				RETURN @@RowCount;
+			
+END
+GO
+/****** Object:  Table [dbo].[USUARIO]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USUARIO](
+	[IdUsuario] [smallint] IDENTITY(1,1) NOT NULL,
+	[LoginUsuario] [nchar](10) NOT NULL,
+	[ContraseniaUsuario] [nvarchar](50) NOT NULL,
+	[NombreUsuario] [nvarchar](50) NOT NULL,
+	[CelularUsuario] [bigint] NULL,
+	[DireccionUsuario] [nchar](20) NULL,
+	[NumeroDocumentoUsuario] [bigint] NULL,
+	[EmailUsuario] [nvarchar](50) NULL,
+	[IdPerfil] [smallint] NULL,
+ CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED 
+(
+	[IdUsuario] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id Principal de la tabla USUARIO este campo autonumerico.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'IdUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Login de acceso del usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'LoginUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Contraseña del usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'ContraseniaUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre completo del usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'NombreUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de celular del usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'CelularUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Dirección del usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'DireccionUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de documento del usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'NumeroDocumentoUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Correo del usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'EmailUsuario'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del perfil de usuario.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'USUARIO', @level2type=N'COLUMN',@level2name=N'IdPerfil'
+GO
+/****** Object:  Table [dbo].[CLIENTE]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CLIENTE](
+	[IdCliente] [int] IDENTITY(1,1) NOT NULL,
+	[NombreCliente] [nvarchar](50) NOT NULL,
+	[NumeroDocumentoCliente] [nvarchar](50) NULL,
+	[CelularCliente] [bigint] NULL,
+	[DireccionCliente] [nvarchar](50) NULL,
+	[NumeroDeCompras] [int] NOT NULL,
+	[IdTipoCliente] [smallint] NOT NULL,
+	[IdTipoDocumento] [smallint] NOT NULL,
+	[EmailCliente] [nchar](50) NULL,
+ CONSTRAINT [PK_CLIENTE] PRIMARY KEY CLUSTERED 
+(
+	[IdCliente] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id de la tabla de clientes campo autonumerico.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'IdCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre completo del cliente.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'NombreCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de documento o nit del cliente.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'NumeroDocumentoCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Número de celular del cliente.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'CelularCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Dirección del cliente.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'DireccionCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Este campo almacena el registro de las veces que un cliente realice una comprra es acomulativo.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'NumeroDeCompras'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del tipo de cliente (PERSONA - EMPRESA)' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'IdTipoCliente'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del tipo de documento' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'CLIENTE', @level2type=N'COLUMN',@level2name=N'IdTipoDocumento'
+GO
+/****** Object:  StoredProcedure [dbo].[CIUDAD_INSERTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CIUDAD_INSERTAR]
+@NOM   NCHAR(50),
+@ABR      NCHAR(4)
+
+AS
+BEGIN
+	INSERT INTO [dbo].[CIUDAD]( NombreCiudad,AbreviaturaCiudad) 
+			VALUES(@NOM,@ABR);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CIUDAD_ELIMINAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE  PROCEDURE [dbo].[CIUDAD_ELIMINAR]
+	@ID INT
+AS
+BEGIN
+		DELETE FROM [dbo].[CIUDAD]
+		WHERE IdCiudad = @ID;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CIUDAD_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CIUDAD_CONSULTAR]
+@TipoConsulta INT ,
+@CIUDAD NCHAR(50)
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT	NombreCiudad,AbreviaturaCiudad
+						
+				FROM	[CIUDAD] WITH (NOLOCK)
+			END
+		--CONSULTA TODOS LOS REGISTROS POR user
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT	NombreCiudad,AbreviaturaCiudad
+						
+				FROM	[CIUDAD] WITH (NOLOCK)
+			
+				WHERE NombreCiudad=@CIUDAD;
+			END
+		IF @TipoConsulta = 2
+			BEGIN
+				SELECT	NombreCiudad
+						
+				FROM	[CIUDAD] WITH (NOLOCK)
+			
+				
+			END
+			
+			IF @TipoConsulta = 3
+			BEGIN
+				SELECT	NombreCiudad
+						
+				FROM	[CIUDAD] WITH (NOLOCK)
+			WHERE NombreCiudad=@CIUDAD;
+				
+			END
+			
+			IF @TipoConsulta = 4
+			BEGIN
+				SELECT	IdCiudad
+						
+				FROM	[CIUDAD] WITH (NOLOCK)
+			WHERE NombreCiudad=@CIUDAD;
+				
+			END
+			
+			
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CIUDAD_ACTUALIZAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CIUDAD_ACTUALIZAR]
+@NOM     NCHAR(50),
+@ABR     NCHAR(4),
+@ID      int
+					
+	
+AS
+BEGIN
+		
+				UPDATE [CIUDAD] 
+				SET		
+						NombreCiudad				=@NOM,
+						AbreviaturaCiudad			= @ABR
+						
+						
+				WHERE	IdCiudad				     = @id;
+
+				RETURN @@RowCount;
+			
+END
+GO
+/****** Object:  StoredProcedure [dbo].[FACTURA_INSERTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[FACTURA_INSERTAR]
+@NUMEROFAC        NCHAR(20),
+@IDPUNTOVEN	      SMALLINT,
+@CAN              SMALLINT,
+@VALOR			  MONEY,
+@IDCLI            INT,
+@IVA              INT,
+@FECHA            DATETIME,
+@OBSER		      NCHAR(300)
+AS
+BEGIN
+	INSERT INTO [dbo].[FACTURA]( NumeroFactura,IdPuntoVenta,CantidadProductos,ValorTotal,IdCliente,ValorIVA,FechaHoraFactura,Observaciones) 
+			VALUES(@NUMEROFAC,@IDPUNTOVEN,@CAN,@VALOR,@IDCLI,@IVA,@FECHA,@OBSER);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[FACTURA_ELIMINAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE  PROCEDURE [dbo].[FACTURA_ELIMINAR]
+	@NUMERO int
+AS
+BEGIN
+		DELETE FROM [dbo].[FACTURA]
+		WHERE IdFactura = @NUMERO;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MARCA_INSERTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MARCA_INSERTAR]
+@NOM   NCHAR(50),
+@NUMERO      NCHAR(15)
+
+AS
+BEGIN
+	INSERT INTO [dbo].[MARCA]( NombreMarca,NumeroReferencia) 
+			VALUES(@NOM,@NUMERO);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MARCA_ELIMINAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE   PROCEDURE [dbo].[MARCA_ELIMINAR]
+	@ID			INT
+AS
+BEGIN
+		DELETE FROM [dbo].[MARCA]
+		WHERE IdMarca  = @ID;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MARCA_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MARCA_CONSULTAR]
+@TipoConsulta INT ,
+@MARCA NCHAR(50)
+	
+AS
+BEGIN
+		--CONSULTA  TODOS REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT	NombreMarca,NumeroReferencia
+						
+				FROM	[MARCA] WITH (NOLOCK)
+			END
+		--CONSULTA TODOS LOS REGISTROS POR user
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT	NombreMarca,NumeroReferencia
+						
+				FROM	[MARCA] WITH (NOLOCK)
+			
+				WHERE NombreMarca=@MARCA;
+			END
+			
+			--CONSULTA TOSO LOS NOMBRE DE MARCAS
+			
+		IF @TipoConsulta = 2
+			BEGIN
+				SELECT	IdMarca
+						
+				FROM	[MARCA] WITH (NOLOCK)
+				WHERE NombreMarca=@MARCA;
+			
+				
+			END
+			
+			IF @TipoConsulta = 3
+			BEGIN
+				SELECT	NombreMarca
+						
+				FROM	[MARCA] WITH (NOLOCK)
+				
+			
+				
+			END
+		
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MARCA_ACTUALIZAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MARCA_ACTUALIZAR]
+@NOM     NCHAR(50),
+@NUMERO     NCHAR(15),
+@ID			int
+					
+	
+AS
+BEGIN
+		
+				UPDATE [MARCA] 
+				SET		NombreMarca			= @NOM,
+						NumeroReferencia    =@NUMERO
+						
+						
+				WHERE	IdMarca			= @ID;
+
+				RETURN @@RowCount;
+			
+END
+GO
+/****** Object:  Table [dbo].[PRODUCTO]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PRODUCTO](
+	[IdProducto] [int] IDENTITY(1,1) NOT NULL,
+	[NombreProducto] [nvarchar](100) NOT NULL,
+	[Cantidad] [smallint] NOT NULL,
+	[CantidadMinima] [smallint] NOT NULL,
+	[IdMarca] [smallint] NOT NULL,
+	[Valor] [money] NOT NULL,
+	[IdTipoProducto] [smallint] NOT NULL,
+	[NumeroReferencia] [nvarchar](15) NOT NULL,
+	[IdProvedor] [smallint] NOT NULL,
+ CONSTRAINT [PK_PRODUCTO] PRIMARY KEY CLUSTERED 
+(
+	[IdProducto] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id principal de la tabla.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'IdProducto'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'NombreProducto'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cantidad en bodega del producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'Cantidad'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Cantidad minima del producto, aviso para reporte.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'CantidadMinima'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id de la marca del producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'IdMarca'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Valor del producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'Valor'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del tipo de producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'IdTipoProducto'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Numero de referencia del producto.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'NumeroReferencia'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del proveedor.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PRODUCTO', @level2type=N'COLUMN',@level2name=N'IdProvedor'
+GO
+/****** Object:  StoredProcedure [dbo].[PROVEEDOR_INSERTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PROVEEDOR_INSERTAR]
+@NOMBRE         NCHAR(50),
+@DIRECCION      NCHAR(50),
+@TELEFONO       BIGINT,
+@CELULAR        BIGINT,
+@CONTACTO      NCHAR(50),
+@CELCONTACTO    BIGINT,
+@NIT            NCHAR(10)
+AS
+BEGIN
+	INSERT INTO [dbo].[PROVEEDOR](NombreProveedor,DireccionProveedor,TelefonoProveedor,CelularProveedor,NombreContacto,CelularContacto,NitProveedor ) 
+			VALUES(@NOMBRE,@DIRECCION,@TELEFONO,@CELULAR,@CONTACTO,@CELCONTACTO,@NIT);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PROVEEDOR_ELIMINAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PROVEEDOR_ELIMINAR]
+	@ID INT
+AS
+BEGIN
+		DELETE FROM [dbo].[PROVEEDOR]
+		WHERE IdProveedor = @ID;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PROVEEDOR_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PROVEEDOR_CONSULTAR]
+@TipoConsulta INT, 
+	@NOMBRE VARCHAR(50)
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT	NombreProveedor,DireccionProveedor,TelefonoProveedor,CelularProveedor,NombreContacto,CelularContacto,NitProveedor 
+						
+				FROM	[PROVEEDOR] WITH (NOLOCK)
+			END
+		--CONSULTA TODOS LOS REGISTROS POR user
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT	 NombreProveedor,DireccionProveedor,TelefonoProveedor,CelularProveedor,NombreContacto,CelularContacto,NitProveedor 
+						
+				FROM	[PROVEEDOR] WITH (NOLOCK)
+				WHERE	NombreProveedor= @NOMBRE;
+			END
+		--CONSULTA SOLO EL USUSARIO
+		IF @TipoConsulta = 2
+			BEGIN
+				SELECT	 IdProveedor 
+						
+				FROM	[PROVEEDOR] WITH (NOLOCK)
+				 WHERE       NombreProveedor= @NOMBRE;
+			END
+		--CONSULTA SOLO EL USUSARIO
+		IF @TipoConsulta = 3
+			BEGIN
+				SELECT	 NombreProveedor 
+						
+				FROM	[PROVEEDOR] WITH (NOLOCK)
+				
+			END
+		
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PROVEEDOR_ACTUALIZAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PROVEEDOR_ACTUALIZAR]
+@TipoActualizacion INT,
+@NOMBRE         NCHAR(50),
+@DIRECCION      NCHAR(50),
+@TELEFONO       BIGINT,
+@CELULAR        BIGINT,
+@CONTACTO      NCHAR(50),
+@CELCONTACTO    BIGINT,
+@NIT            NCHAR(10),
+@ID			INT					
+	
+AS
+BEGIN
+		IF @TipoActualizacion = 1
+			BEGIN
+				UPDATE [PROVEEDOR] 
+				SET		NombreProveedor			= @NOMBRE,
+						DireccionProveedor		= @DIRECCION, 
+						TelefonoProveedor		= @TELEFONO,
+						CelularProveedor		= @CELULAR,
+						NombreContacto		    = @CONTACTO,
+						CelularContacto			= @CELCONTACTO,
+						NitProveedor			= @NIT
+						
+						
+				WHERE	IdProveedor			= @ID;
+
+				RETURN @@RowCount;
+			END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PRODUCTO_FACTURA_INSERTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PRODUCTO_FACTURA_INSERTAR]
+@IDFAC      INT,
+@IDPRO		INT,
+@CAN		INT,
+@SUB		INT,
+@COM		NCHAR(10),
+@DES		NCHAR(10)
+
+AS
+BEGIN
+	INSERT INTO [dbo].[PRODUCTOS_FACTURA](IdFactura,IdProducto,CantidadProducto,SubTotal,COMBO,DESCUENTO) 
+			VALUES(@IDFAC,@IDPRO,@CAN,@SUB,@COM,@DES);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PRODUCTO_FACTURA_ELIMINAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE  PROCEDURE [dbo].[PRODUCTO_FACTURA_ELIMINAR]
+	@NUMERO int
+AS
+BEGIN
+		DELETE FROM [dbo].[PRODUCTOS_FACTURA]
+		WHERE IdFactura = @NUMERO;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PRODUCTO_ELIMINAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE  PROCEDURE [dbo].[PRODUCTO_ELIMINAR]
+	@ID INT
+AS
+BEGIN
+		DELETE FROM [dbo].[PRODUCTO]
+		WHERE IdProducto = @ID;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PRODUCTO_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PRODUCTO_CONSULTAR]
+@TipoConsulta INT, 
+	@NOMBRE NCHAR(50),
+	@ID int
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT P.NombreProducto,P.Cantidad,P.CantidadMinima,P.Valor,P.NumeroReferencia,M.NombreMarca,TP.NombreTipoProducto,PRO.NombreProveedor,P.IdProducto
+                FROM PRODUCTO P INNER JOIN MARCA M ON P.IdMarca=M.IdMarca
+		                        INNER JOIN TIPO_PRODUCTO TP ON P.IdTipoProducto=TP.IdTipoProducto
+		                        INNER JOIN PROVEEDOR PRO ON P.IdProvedor=PRO.IdProveedor;
+			END
+		
+		
+		--CONSULTA REGISTRO PARA EL MODULO FACTURA
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT P.NombreProducto,P.Valor,M.NombreMarca,TP.NombreTipoProducto,P.IdProducto,P.IdTipoProducto
+                FROM PRODUCTO P INNER JOIN MARCA M ON P.IdMarca=M.IdMarca
+		                        INNER JOIN TIPO_PRODUCTO TP ON P.IdTipoProducto=TP.IdTipoProducto
+		                        INNER JOIN PROVEEDOR PRO ON P.IdProvedor=PRO.IdProveedor and P.NumeroReferencia=@NOMBRE;
+			END
+		
+		
+		   IF @TipoConsulta = 2
+			BEGIN
+				  SELECT IdProducto,Cantidad,CantidadMinima
+                  FROM PRODUCTO 
+                  WHERE NombreProducto=@NOMBRE;
+              END
+		
+		--CONSULTA REGISTRO PARA EL MODULO FACTURA
+		IF @TipoConsulta = 3
+			BEGIN
+				SELECT Cantidad,CantidadMinima
+			    FROM PRODUCTO 
+			    WHERE NombreProducto=@NOMBRE;
+			END
+			
+			--CONSULTA REGISTRO PARA EL MODULO FACTURA
+		IF @TipoConsulta = 4
+			BEGIN
+				SELECT IdProducto
+			    FROM PRODUCTO 
+			    WHERE NombreProducto=@NOMBRE;
+			END
+		
+		
+		--CONSULTA REGISTRO PARA EL MODULO BODEGA POR NOMBRE
+		
+		IF @TipoConsulta = 5
+			BEGIN
+				SELECT P.NombreProducto,P.Cantidad,P.CantidadMinima,P.Valor,P.NumeroReferencia,M.NombreMarca,TP.NombreTipoProducto,PRO.NombreProveedor
+                FROM PRODUCTO P INNER JOIN MARCA M ON P.IdMarca=M.IdMarca
+		                        INNER JOIN TIPO_PRODUCTO TP ON P.IdTipoProducto=TP.IdTipoProducto
+		                      INNER JOIN PROVEEDOR PRO ON P.IdProvedor=PRO.IdProveedor and P.NombreProducto=@NOMBRE;
+			END
+			
+			--CONSULTA REGISTRO PARA EL MODULO BODEGA POR TIPO PRODUCTO
+		
+		IF @TipoConsulta = 6
+			BEGIN
+				SELECT P.NombreProducto,P.Cantidad,P.CantidadMinima,P.Valor,P.NumeroReferencia,M.NombreMarca,TP.NombreTipoProducto,PRO.NombreProveedor
+                FROM PRODUCTO P INNER JOIN MARCA M ON P.IdMarca=M.IdMarca
+		                        INNER JOIN TIPO_PRODUCTO TP ON P.IdTipoProducto=TP.IdTipoProducto
+		                      INNER JOIN PROVEEDOR PRO ON P.IdProvedor=PRO.IdProveedor and TP.NombreTipoProducto=@NOMBRE;
+			END
+			
+			--CONSULTA REGISTRO PARA EL MODULO BODEGA POR CODIGO
+		
+		IF @TipoConsulta = 7
+			BEGIN
+				SELECT P.NombreProducto,P.Cantidad,P.CantidadMinima,P.Valor,P.NumeroReferencia,M.NombreMarca,TP.NombreTipoProducto,PRO.NombreProveedor
+                FROM PRODUCTO P INNER JOIN MARCA M ON P.IdMarca=M.IdMarca
+		                        INNER JOIN TIPO_PRODUCTO TP ON P.IdTipoProducto=TP.IdTipoProducto
+		                      INNER JOIN PROVEEDOR PRO ON P.IdProvedor=PRO.IdProveedor and P.NumeroReferencia=@NOMBRE;
+			END
+			
+			
+			--CONSULTA REGISTRO PARA EL MODULO BODEGA POR MARCA
+		
+		IF @TipoConsulta = 8
+			BEGIN
+			SELECT P.NombreProducto,P.Cantidad,P.CantidadMinima,P.Valor,P.NumeroReferencia,M.NombreMarca,TP.NombreTipoProducto,PRO.NombreProveedor
+                FROM PRODUCTO P INNER JOIN MARCA M ON P.IdMarca=M.IdMarca
+		                        INNER JOIN TIPO_PRODUCTO TP ON P.IdTipoProducto=TP.IdTipoProducto
+		                      INNER JOIN PROVEEDOR PRO ON P.IdProvedor=PRO.IdProveedor and M.NombreMarca=@NOMBRE;
+			END
+			
+			
+			
+			IF @TipoConsulta = 9
+			BEGIN
+				SELECT NombreProducto       
+				FROM 
+					PRODUCTO;
+			
+			END
+			
+			 IF @TipoConsulta = 10
+			BEGIN
+				  SELECT IdProducto,Cantidad,CantidadMinima
+                  FROM PRODUCTO 
+                  WHERE IdProducto=@ID;
+              END
+			
+			
+			 IF @TipoConsulta = 11
+			BEGIN
+				  SELECT NombreProducto
+                  FROM PRODUCTO 
+                  WHERE IdTipoProducto=@ID;
+              END
+			
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PRODUCTO_ACTUALIZAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PRODUCTO_ACTUALIZAR]
+@TipoActualizacion INT,
+@NOMBRE        NCHAR(50),
+@CAN           SMALLINT,
+@CANMIN 	   SMALLINT,
+@IDMAR         SMALLINT,
+@VALOR          MONEY,
+@IDTIPOPRO        SMALLINT,
+@NUMREF        NCHAR(15),
+@IDPROVE	   SMALLINT	,
+@ID				INT	
+	
+	
+AS
+BEGIN
+		IF @TipoActualizacion = 1
+			BEGIN
+				UPDATE [PRODUCTO] 
+				SET		NombreProducto				= @NOMBRE,
+						Cantidad					= @CAN, 
+						CantidadMinima				= @CANMIN,
+						IdMarca						= @IDMAR,
+						Valor			            = @VALOR,
+						IdTipoProducto				= @IDTIPOPRO,
+						NumeroReferencia			= @NUMREF,
+						IdProvedor					=@IDPROVE
+					
+						
+						
+				WHERE	IdProducto				= @ID;
+
+				RETURN @@RowCount;
+			END
+			
+			IF @TipoActualizacion = 2
+			BEGIN
+				UPDATE [PRODUCTO] 
+				SET		
+						Cantidad					= @CAN
+					
+						
+						
+				WHERE	IdProducto				= @ID;
+
+				RETURN @@RowCount;
+			END
+			
+			
+			
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PRODUCTO_INSERTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PRODUCTO_INSERTAR]
+@NOMBRE        NCHAR(50),
+@CAN           SMALLINT,
+@CANMIN 	   SMALLINT,
+@IDMAR         SMALLINT,
+@VALOR          MONEY,
+@IDTIPOPRO        SMALLINT,
+@NUMREF        NCHAR(15),
+@IDPROVE	   SMALLINT
+
+
+AS
+BEGIN
+	INSERT INTO [dbo].[PRODUCTO](NombreProducto,Cantidad,CantidadMinima,IdMarca,Valor,IdTipoProducto,NumeroReferencia,IdProvedor) 
+			VALUES(@NOMBRE,@CAN,@CANMIN,@IDMAR,@VALOR,@IDTIPOPRO,@NUMREF,@IDPROVE);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PRINCIPAL_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PRINCIPAL_CONSULTAR]
+
+	@USER NCHAR(10)
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		
+			
+				SELECT P.ModuloUsuario,P.ModuloCliente,P.ModuloPerfil,P.ModuloProveedor,P.ModuloMarca,P.ModuloCiudad,U.LoginUsuario,P.ModuloFactura,P.ModuloPuntoVenta,P.ModuloProductos,P.ModuloReporte,ModuloCorreo,ModuloBodega,ModuloCalendario,ModuloCombo,ModuloTipoProducto
+				          
+				FROM  PERFIL P  INNER JOIN USUARIO U ON P.IdPerfil=U.IdPerfil AND U.LoginUsuario=@USER;					
+			END
+GO
+/****** Object:  StoredProcedure [dbo].[CLIENTES_VOLUMEN_VENTAS]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[CLIENTES_VOLUMEN_VENTAS]
+@TipoActualizacion INT
+
+		
+	
+AS
+BEGIN
+		IF @TipoActualizacion = 0
+			BEGIN
+			  select CLI.NumeroDocumentoCliente,CLI.NombreCliente,CLI.NumeroDeCompras,(SUM (FACT.ValorTotal) )as total
+				from CLIENTE CLI inner join FACTURA fact ON CLI.IdCliente=FACT.IdCliente
+				GROUP BY CLI.NumeroDocumentoCliente,CLI.NombreCliente,CLI.NumeroDeCompras
+			END
+			
+			
+			
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CLIENTE_INSERTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CLIENTE_INSERTAR]
+@NOMBRE        NCHAR(50),
+@DOCUMENTO     NCHAR(50),
+@CELULAR	   BIGINT,
+@DIRECCION     NCHAR(50),
+@NUMEROCOM     INT,
+@ICLI          INT,
+@IDCO          INT,
+@EMAIL         NCHAR(50)
+
+AS
+BEGIN
+	INSERT INTO [dbo].[CLIENTE]( NombreCliente,NumeroDocumentoCliente,CelularCliente,DireccionCliente,NumeroDeCompras,IdTipoCliente,IdTipoDocumento,EmailCliente) 
+			VALUES(@NOMBRE,@DOCUMENTO,@CELULAR,@DIRECCION,@NUMEROCOM,@ICLI,@IDCO,@EMAIL);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CLIENTE_ELIMINAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE  PROCEDURE [dbo].[CLIENTE_ELIMINAR]
+	@ID INT,
+	@CEDULA NCHAR(50)
+AS
+BEGIN
+		DELETE FROM [dbo].[CLIENTE]
+		WHERE IdCliente = @ID and NumeroDocumentoCliente=@CEDULA;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CLIENTE_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CLIENTE_CONSULTAR]
+@TipoConsulta INT = 0, 
+	@USER VARCHAR(10) = '',
+	@CEDULA VARCHAR(50) = ''
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT CLI.NombreCliente,CLI.NumeroDocumentoCliente,CLI.CelularCliente,CLI.DireccionCliente,CLI.NumeroDeCompras,TC.NombreTipoCliente,TD.NombreTipoDocumento,CLI.EmailCliente         
+				FROM 
+					CLIENTE CLI INNER JOIN TIPO_CLIENTE TC ON CLI.IdTipoCliente=TC.IdTipoCliente 
+						        INNER JOIN TIPO_DOCUMENTO TD ON  CLI.IdTipoDocumento=TD.IdTipoDocumento;
+			END
+		--CONSULTA TODOS LOS REGISTROS POR user
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT	 NombreCliente,NumeroDocumentoCliente,CelularCliente,DireccionCliente,NumeroDeCompras,IdTipoCliente,IdTipoDocumento,EmailCliente
+						
+				FROM	[CLIENTE] WITH (NOLOCK)
+				WHERE	NombreCliente= @USER;
+			END
+		--CONSULTA SOLO EL USUSARIO
+		IF @TipoConsulta = 2
+			BEGIN
+				SELECT	NombreCliente 
+						
+				FROM	[CLIENTE] WITH (NOLOCK)
+				WHERE	NombreCliente= @USER;
+			END
+			
+			IF @TipoConsulta = 3
+			BEGIN
+				SELECT  IdCliente,NombreCliente 
+						
+				FROM	[CLIENTE] WITH (NOLOCK)
+				WHERE	NumeroDocumentoCliente= @CEDULA;
+			END
+			
+			IF @TipoConsulta = 4
+			BEGIN
+				SELECT  NumeroDocumentoCliente,NombreCliente 
+						
+				FROM	[CLIENTE] WITH (NOLOCK)
+				WHERE	IdCliente= @CEDULA;
+			END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CLIENTE_ACTUALIZAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[CLIENTE_ACTUALIZAR]
+@TipoActualizacion INT,
+@NOMBRE        NCHAR(50),
+@DOCUMENTO     NCHAR(50),
+@CELULAR	   BIGINT,
+@DIRECCION     NCHAR(50),
+@NUMEROCOM     INT,
+@ICLI          INT,
+@IDCO          INT,
+@ID				int	,
+@EMAIL         NCHAR(50)
+				
+	
+AS
+BEGIN
+		IF @TipoActualizacion = 1
+			BEGIN
+				UPDATE [CLIENTE] 
+				SET		NombreCliente				= @NOMBRE,
+						NumeroDocumentoCliente		= @DOCUMENTO, 
+						CelularCliente				= @CELULAR,
+						DireccionCliente			= @DIRECCION,
+						
+						IdTipoCliente				= @ICLI,
+						IdTipoDocumento				= @IDCO,
+						EmailCliente				=@EMAIL
+						
+						
+						
+				WHERE	IdCliente				= @ID;
+
+				RETURN @@RowCount;
+			END
+			
+			
+			
+			IF @TipoActualizacion = 2
+			BEGIN
+				UPDATE [CLIENTE] 
+				SET		NumeroDeCompras         =(NumeroDeCompras)+1
+						
+				WHERE	IdCliente				= @ID;
+
+				RETURN @@RowCount;
+			END
+			IF @TipoActualizacion = 3
+			BEGIN
+				UPDATE [CLIENTE] 
+				SET		NumeroDeCompras         =(NumeroDeCompras)-1
+						
+				WHERE	IdCliente				= @ID;
+
+				RETURN @@RowCount;
+			END
+			
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USUARIOS_LOGIN]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[USUARIOS_LOGIN]
+@USER nchar(10),
+@PASS  nchar(50)
+AS
+BEGIN
+	SELECT LoginUsuario,ContraseniaUsuario from USUARIO
+	WHERE  LoginUsuario=@USER AND ContraseniaUsuario=@PASS;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USUARIOS_INSERTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[USUARIOS_INSERTAR]
+@LOGIN     NCHAR(10),
+@PASS      NCHAR(50),
+@NOMBRE    NCHAR(50),
+@CELULAR    BIGINT,
+@DIRECCION  NCHAR(20),
+@DOCUMENTO  BIGINT,
+@EMAIL      NCHAR(50),
+@IDPERFIL   SMALLINT
+AS
+BEGIN
+	INSERT INTO [dbo].[USUARIO]( LoginUsuario,ContraseniaUsuario,NombreUsuario,CelularUsuario,DireccionUsuario,NumeroDocumentoUsuario,EmailUsuario,IdPerfil) 
+			VALUES(@LOGIN,@PASS,@NOMBRE,@CELULAR,@DIRECCION,@DOCUMENTO,@EMAIL,@IDPERFIL);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USUARIOS_ELIMINAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[USUARIOS_ELIMINAR]
+	@ID  INT 
+AS
+BEGIN
+		DELETE FROM [dbo].[USUARIO]
+		WHERE IdUsuario = @ID;
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USUARIOS_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[USUARIOS_CONSULTAR]
+@TipoConsulta INT = 0, 
+	@USER VARCHAR(10) = '',
+	@CEDULA BIGINT = ''
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT	U.LoginUsuario,U.ContraseniaUsuario, U.NombreUsuario,U.CelularUsuario,U.DireccionUsuario,U.NumeroDocumentoUsuario,U.EmailUsuario,P.NombrePerfil 
+						
+				FROM	USUARIO U INNER JOIN PERFIL P ON U.IdPerfil=P.IdPerfil; 
+			END
+		--CONSULTA TODOS LOS REGISTROS POR user
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT	 LoginUsuario,ContraseniaUsuario, NombreUsuario,CelularUsuario,DireccionUsuario,NumeroDocumentoUsuario,EmailUsuario 
+						
+				FROM	[USUARIO] WITH (NOLOCK)
+				WHERE	LoginUsuario= @USER;
+			END
+		--CONSULTA SOLO EL USUSARIO
+		IF @TipoConsulta = 2
+			BEGIN
+				SELECT	LoginUsuario 
+						
+				FROM	[USUARIO] WITH (NOLOCK)
+				WHERE	NumeroDocumentoUsuario= @USER;
+			END
+			
+			--CONSULTA SOLO EL USUSARIO
+		IF @TipoConsulta = 3
+			BEGIN
+				SELECT	LoginUsuario 
+						
+				FROM	[USUARIO] WITH (NOLOCK)
+				
+			END
+			
+			--CONSULTA SOLO EL USUSARIO
+		IF @TipoConsulta = 4
+			BEGIN
+				SELECT	IdUsuario 
+						
+				FROM	[USUARIO] WITH (NOLOCK)
+				WHERE	LoginUsuario= @USER;
+				
+			END
+			
+			IF @TipoConsulta = 5
+			BEGIN
+				SELECT	NombreUsuario
+						
+				FROM	[USUARIO] WITH (NOLOCK)
+				WHERE	LoginUsuario= @USER;
+				
+			END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USUARIOS_ACTUALIZAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE  PROCEDURE [dbo].[USUARIOS_ACTUALIZAR]
+@TipoActualizacion INT,
+@LOGIN     NCHAR(10),
+@PASS      NCHAR(50),
+@NOMBRE    NCHAR(50),
+@CELULAR    BIGINT,
+@DIRECCION  NCHAR(20),
+@DOCUMENTO  BIGINT,
+@EMAIL      NCHAR(50),
+@IDPERFIL   SMALLINT,
+@ID			INT					
+	
+AS
+BEGIN
+		IF @TipoActualizacion = 1
+			BEGIN
+				UPDATE [USUARIO] 
+				SET		LoginUsuario			= @LOGIN,
+						ContraseniaUsuario		= @PASS, 
+						NombreUsuario			= @NOMBRE,
+						CelularUsuario			= @CELULAR,
+						DireccionUsuario		= @DIRECCION,
+						NumeroDocumentoUsuario	= @DOCUMENTO,
+						EmailUsuario			= @EMAIL, 
+						IdPerfil				= @IDPERFIL
+						
+				WHERE	IdUsuario				= @ID;
+
+				RETURN @@RowCount;
+			END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[TIQUETE_DES_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[TIQUETE_DES_CONSULTAR]
+@IDFAC int
+
+	
+AS
+BEGIN
+		
+		
+				SELECT	P.NOmbreproducto,P.talla,PF.Cantidadproducto,PF.Subtotal,PF.COMBO,PF.DESCUENTO
+				FROM PRODUCTO P INNER JOIN PRODUCTOS_FACTURA PF 
+				ON P.IdProducto=PF.IdProducto and IdFactura=@IDFAC;
+				
+END
+GO
+/****** Object:  Table [dbo].[PUNTO_DE_VENTA]    Script Date: 09/20/2015 08:47:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PUNTO_DE_VENTA](
+	[IdPuntoVenta] [smallint] IDENTITY(1,1) NOT NULL,
+	[NombrePuntoVenta] [nvarchar](50) NOT NULL,
+	[IdCiudad] [smallint] NOT NULL,
+	[DireccionPuntoVenta] [nvarchar](50) NOT NULL,
+	[TelefonoPuntoVenta] [bigint] NULL,
+	[CelularPuntoVenta] [bigint] NULL,
+	[CodigoPuntoVenta] [nchar](10) NULL,
+	[NombreEmpresa] [nvarchar](50) NOT NULL,
+	[IdUsuario] [smallint] NOT NULL,
+ CONSTRAINT [PK_PUNTO_DE_VENTA] PRIMARY KEY CLUSTERED 
+(
+	[IdPuntoVenta] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del punto de venta' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'IdPuntoVenta'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre del punto de venta' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'NombrePuntoVenta'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id de la ciudad donde pertenece el punto de venta.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'IdCiudad'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Dirección del punto de venta.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'DireccionPuntoVenta'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Telefono del punto de venta.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'TelefonoPuntoVenta'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Celular del punto de venta.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'CelularPuntoVenta'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Código unico del punto de venta.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'CodigoPuntoVenta'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Nombre de la empresa.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'NombreEmpresa'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Id del usuario asociado al punto de venta.' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'PUNTO_DE_VENTA', @level2type=N'COLUMN',@level2name=N'IdUsuario'
+GO
+/****** Object:  StoredProcedure [dbo].[REPORTE_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[REPORTE_CONSULTAR]
+@TipoConsulta INT ,
+@NFACT		nchar(10),
+@DESDE      DATETIME=null,
+@HASTA		DATETIME=null
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID POR NUMERO DE FACTURA
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT FA.NumeroFactura, PR.NumeroReferencia,PR.NombreProducto,PF.CantidadProducto,PF.SubTotal,
+				FA.ValorTotal,FA.ValorIVA,FechaHoraFactura,CLI.NombreCliente,CLI.NumeroDocumentoCliente,
+				P.NombrePuntoVenta,C.NombreCiudad       
+				FROM 
+					PRODUCTOS_FACTURA PF 
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					INNER JOIN PRODUCTO pr on pf.IdProducto = pr.IdProducto
+				    INNER JOIN CLIENTE CLI ON FA.IdCliente=CLI.IdCliente
+				    INNER JOIN PUNTO_DE_VENTA p ON FA.IdPuntoVenta=P.IdPuntoVenta
+					INNER JOIN  CIUDAD C ON p.IdCiudad=C.IdCiudad
+					
+					
+					WHERE fa.NumeroFactura=@NFACT AND FA.devolucion is null;
+					END
+					
+			--CONSULTA REGISTRO PARA RANGO DE  FECHAS	
+			IF @TipoConsulta = 2
+			BEGIN
+				SELECT FA.NumeroFactura, PR.NumeroReferencia,PR.NombreProducto,PF.CantidadProducto,PF.SubTotal,
+				FA.ValorTotal,FA.ValorIVA,FechaHoraFactura,CLI.NombreCliente,CLI.NumeroDocumentoCliente,
+				P.NombrePuntoVenta,C.NombreCiudad       
+				FROM 
+					PRODUCTOS_FACTURA PF 
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					INNER JOIN PRODUCTO pr on pf.IdProducto = pr.IdProducto
+				    INNER JOIN CLIENTE CLI ON FA.IdCliente=CLI.IdCliente
+				    INNER JOIN PUNTO_DE_VENTA p ON FA.IdPuntoVenta=P.IdPuntoVenta
+					INNER JOIN  CIUDAD C ON p.IdCiudad=C.IdCiudad
+					
+					
+					WHERE fa.FechaHoraFactura >= @DESDE AND fa.FechaHoraFactura<=@HASTA  AND FA.devolucion is null;
+					END
+				
+					
+				--CONSULTA REGISTRO PARA EL DATA GRID PARA EL DIA
+					IF @TipoConsulta = 3
+			BEGIN
+				SELECT FA.NumeroFactura, PR.NumeroReferencia,PR.NombreProducto,PF.CantidadProducto,PF.SubTotal,
+				FA.ValorTotal,FA.ValorIVA,FechaHoraFactura,CLI.NombreCliente,CLI.NumeroDocumentoCliente,
+				P.NombrePuntoVenta,C.NombreCiudad       
+				FROM 
+					PRODUCTOS_FACTURA PF 
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					INNER JOIN PRODUCTO pr on pf.IdProducto = pr.IdProducto
+				    INNER JOIN CLIENTE CLI ON FA.IdCliente=CLI.IdCliente
+				    INNER JOIN PUNTO_DE_VENTA p ON FA.IdPuntoVenta=P.IdPuntoVenta
+					INNER JOIN  CIUDAD C ON p.IdCiudad=C.IdCiudad
+					
+					
+					WHERE fa.FechaHoraFactura >= convert(varchar(10),getdate(),103) AND FA.devolucion is null
+					END
+					
+			--CONSULTA REGISTRO PARA LA SUMA POR NUMERO DE FACTUERA
+					
+			IF @TipoConsulta = 4
+			    BEGIN
+					SELECT  SUM(PF.SubTotal)
+					FROM PRODUCTOS_FACTURA PF
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					WHERE fa.NumeroFactura=@NFACT;
+				END
+					
+			--CONSULTA REGISTRO PARA LA SUMA POR NUMERO DE FACTUERA	
+					IF @TipoConsulta = 5
+			BEGIN
+				SELECT  SUM(PF.SubTotal)
+					FROM PRODUCTOS_FACTURA PF
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					
+					
+					WHERE fa.FechaHoraFactura >= @DESDE AND fa.FechaHoraFactura<=@HASTA AND FA.devolucion is null;
+					END
+			END
+			--CONSULTA REGISTRO PARA EL DATA GRID PARA EL DIA
+					
+				IF @TipoConsulta = 6
+			BEGIN
+				SELECT  SUM(PF.SubTotal)
+					FROM PRODUCTOS_FACTURA PF
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura AND FA.devolucion is null
+					
+					
+					
+					
+					WHERE fa.FechaHoraFactura >= convert(varchar(10),getdate(),103) 
+					END
+					
+					--CONSULTA REGISTRO PARA EL DATA GRID PARA EL DIA
+					IF @TipoConsulta = 7
+			BEGIN
+				SELECT FA.NumeroFactura, PR.NumeroReferencia,PR.NombreProducto,PF.CantidadProducto,PF.SubTotal,
+				FA.ValorTotal,FA.ValorIVA,FechaHoraFactura,CLI.NombreCliente,CLI.NumeroDocumentoCliente,
+				P.NombrePuntoVenta,C.NombreCiudad       
+				FROM 
+					PRODUCTOS_FACTURA PF 
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					INNER JOIN PRODUCTO pr on pf.IdProducto = pr.IdProducto
+				    INNER JOIN CLIENTE CLI ON FA.IdCliente=CLI.IdCliente
+				    INNER JOIN PUNTO_DE_VENTA p ON FA.IdPuntoVenta=P.IdPuntoVenta
+					INNER JOIN  CIUDAD C ON p.IdCiudad=C.IdCiudad
+					
+					
+					WHERE fa.FechaHoraFactura >= convert(varchar(10),getdate(),103)  AND FA.devolucion = '1';
+					END
+					--CONSULTA REGISTRO PARA RANGO DE  FECHAS	
+			IF @TipoConsulta = 8
+			BEGIN
+				SELECT FA.NumeroFactura, PR.NumeroReferencia,PR.NombreProducto,PF.CantidadProducto,PF.SubTotal,
+				FA.ValorTotal,FA.ValorIVA,FechaHoraFactura,CLI.NombreCliente,CLI.NumeroDocumentoCliente,
+				P.NombrePuntoVenta,C.NombreCiudad       
+				FROM 
+					PRODUCTOS_FACTURA PF 
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					INNER JOIN PRODUCTO pr on pf.IdProducto = pr.IdProducto
+				    INNER JOIN CLIENTE CLI ON FA.IdCliente=CLI.IdCliente
+				    INNER JOIN PUNTO_DE_VENTA p ON FA.IdPuntoVenta=P.IdPuntoVenta
+					INNER JOIN  CIUDAD C ON p.IdCiudad=C.IdCiudad
+					
+					
+					WHERE fa.FechaHoraFactura >= @DESDE AND fa.FechaHoraFactura<=@HASTA  AND FA.devolucion ='1';
+					END
+GO
+/****** Object:  StoredProcedure [dbo].[PUNTO_DE_VENTA_INSERTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PUNTO_DE_VENTA_INSERTAR]
+@NOMBRE        NCHAR(50),
+@IDCIU         SMALLINT,
+@DIRECCION     NCHAR(50),
+@TEL	       BIGINT,
+@CEL           BIGINT,
+@CODIGO        NCHAR(10),
+@NOMEMP		   NCHAR(50),
+@IDUSU         SMALLINT
+AS
+BEGIN
+	INSERT INTO [dbo].[PUNTO_DE_VENTA]( NombrePuntoVenta,IdCiudad,DireccionPuntoVenta,TelefonoPuntoVenta,CelularPuntoVenta,CodigoPuntoVenta,NombreEmpresa,IdUsuario) 
+			VALUES(@NOMBRE,@IDCIU,@DIRECCION,@TEL,@CEL,@CODIGO,@NOMEMP,@IDUSU);
+		
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PUNTO_DE_VENTA_ELIMINAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PUNTO_DE_VENTA_ELIMINAR]
+	@ID INT
+AS
+BEGIN
+		DELETE FROM [dbo].[PUNTO_DE_VENTA]
+		WHERE IdPuntoVenta= @ID;
+		
+
+		RETURN @@RowCount;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PUNTO_DE_VENTA_CONSULTAR]    Script Date: 09/20/2015 08:47:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PUNTO_DE_VENTA_CONSULTAR]
+@TipoConsulta INT = 0, 
+	@NOMBRE VARCHAR(10) = ''
+	
+	
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT PV.NombrePuntoVenta,PV.DireccionPuntoVenta,PV.TelefonoPuntoVenta,PV.CelularPuntoVenta,PV.CodigoPuntoVenta,PV.NombreEmpresa,C.NombreCiudad,U.LoginUsuario        
+				FROM 
+					PUNTO_DE_VENTA PV INNER JOIN CIUDAD C ON PV.IdCiudad=C.IdCiudad
+									  INNER JOIN USUARIO U ON PV.IdUsuario=U.IdUsuario;
+			
+			END
+			
+			--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 1
+			BEGIN
+				SELECT NombrePuntoVenta        
+				FROM 
+					PUNTO_DE_VENTA ;
+			
+			END
+			
+			--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 2
+			BEGIN
+				SELECT IdPuntoVenta     
+				FROM 
+					PUNTO_DE_VENTA 
+					WHERE NombrePuntoVenta=@NOMBRE;
+			
+			END
+			END
+GO
+/****** Object:  StoredProcedure [dbo].[PUNTO_DE_VENTA_ACTUALIZAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[PUNTO_DE_VENTA_ACTUALIZAR]
+@TipoActualizacion INT,
+@NOMBRE        NCHAR(50),
+@IDCIU         SMALLINT,
+@DIRECCION     NCHAR(50),
+@TEL	       BIGINT,
+@CEL           BIGINT,
+@CODIGO        NCHAR(10),
+@NOMEMP		   NCHAR(50),
+@IDUSU         SMALLINT,
+@ID				INT
+	
+AS
+BEGIN
+		IF @TipoActualizacion = 0
+			BEGIN
+				UPDATE [PUNTO_DE_VENTA] 
+				SET		NombrePuntoVenta			= @NOMBRE,
+						IdCiudad         		    = @IDCIU, 
+						DireccionPuntoVenta		    = @DIRECCION,
+						TelefonoPuntoVenta		    = @TEL,
+						CelularPuntoVenta	        = @CEL,
+						CodigoPuntoVenta		    = @CODIGO,
+						NombreEmpresa			    = @NOMEMP,
+						IdUsuario					 =@IDUSU
+						
+				WHERE	IdPuntoVenta			= @ID;
+
+				RETURN @@RowCount;
+			END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[FACTURA_CONSULTAR]    Script Date: 09/20/2015 08:47:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[FACTURA_CONSULTAR]
+@TipoConsulta INT, 
+	@CONSECUTIVO VARCHAR(20),
+	@NUMERO int 
+AS
+BEGIN
+		--CONSULTA REGISTRO PARA EL DATA GRID
+		IF @TipoConsulta = 0
+			BEGIN
+				SELECT NumeroFactura          
+				FROM 
+					FACTURA
+					
+					WHERE NumeroFactura=@CONSECUTIVO;
+			END
+			
+			IF @TipoConsulta = 1
+			BEGIN
+				SELECT IdFactura         
+				FROM 
+					FACTURA
+					
+					WHERE NumeroFactura=@CONSECUTIVO;
+			END
+			
+			IF @TipoConsulta = 4
+			BEGIN
+			SELECT TOP 1 NumeroFactura
+			FROM FACTURA
+			ORDER BY IdFactura DESC
+			END
+			
+			
+			
+			IF @TipoConsulta = 5
+			BEGIN
+				
+				SELECT PR.NombreProducto,PR.Valor,PF.CantidadProducto,PF.SubTotal,PR.IdProducto,
+				CLI.NombreCliente,CLI.NumeroDocumentoCliente,FA.ValorTotal,FA.NumeroFactura
+				
+				
+				     
+				FROM 
+					PRODUCTOS_FACTURA PF 
+					INNER JOIN FACTURA FA ON PF.IdFactura = FA.IdFactura
+					INNER JOIN PRODUCTO PR ON PF.IdProducto = PR.IdProducto
+				    INNER JOIN CLIENTE CLI ON FA.IdCliente=CLI.IdCliente
+				    INNER JOIN PUNTO_DE_VENTA P ON FA.IdPuntoVenta=P.IdPuntoVenta
+					INNER JOIN  CIUDAD C ON P.IdCiudad=C.IdCiudad
+					
+					
+					WHERE fa.NumeroFactura=@CONSECUTIVO;
+			END
+			
+			IF @TipoConsulta = 6
+			BEGIN
+			SELECT devolucion
+			FROM FACTURA
+			where  NumeroFactura=@CONSECUTIVO 
+			END
+			
+			IF @TipoConsulta = 7
+			BEGIN
+			SELECT FechaHoraFactura
+			FROM FACTURA
+			where  NumeroFactura=@CONSECUTIVO and FechaHoraFactura<GETDATE()-30 
+			END
+			
+			
+			
+			
+			END
+GO
+/****** Object:  ForeignKey [FK_CLIENTE_TIPO_CLIENTE]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[CLIENTE]  WITH NOCHECK ADD  CONSTRAINT [FK_CLIENTE_TIPO_CLIENTE] FOREIGN KEY([IdTipoCliente])
+REFERENCES [dbo].[TIPO_CLIENTE] ([IdTipoCliente])
+GO
+ALTER TABLE [dbo].[CLIENTE] CHECK CONSTRAINT [FK_CLIENTE_TIPO_CLIENTE]
+GO
+/****** Object:  ForeignKey [FK_CLIENTE_TIPO_DOCUMENTO]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[CLIENTE]  WITH NOCHECK ADD  CONSTRAINT [FK_CLIENTE_TIPO_DOCUMENTO] FOREIGN KEY([IdTipoDocumento])
+REFERENCES [dbo].[TIPO_DOCUMENTO] ([IdTipoDocumento])
+GO
+ALTER TABLE [dbo].[CLIENTE] CHECK CONSTRAINT [FK_CLIENTE_TIPO_DOCUMENTO]
+GO
+/****** Object:  ForeignKey [FK_PRODUCTO_MARCA]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[PRODUCTO]  WITH NOCHECK ADD  CONSTRAINT [FK_PRODUCTO_MARCA] FOREIGN KEY([IdMarca])
+REFERENCES [dbo].[MARCA] ([IdMarca])
+GO
+ALTER TABLE [dbo].[PRODUCTO] CHECK CONSTRAINT [FK_PRODUCTO_MARCA]
+GO
+/****** Object:  ForeignKey [FK_PRODUCTO_PROVEEDOR]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[PRODUCTO]  WITH NOCHECK ADD  CONSTRAINT [FK_PRODUCTO_PROVEEDOR] FOREIGN KEY([IdProvedor])
+REFERENCES [dbo].[PROVEEDOR] ([IdProveedor])
+GO
+ALTER TABLE [dbo].[PRODUCTO] CHECK CONSTRAINT [FK_PRODUCTO_PROVEEDOR]
+GO
+/****** Object:  ForeignKey [FK_PRODUCTO_TIPO_PRODUCTO]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[PRODUCTO]  WITH NOCHECK ADD  CONSTRAINT [FK_PRODUCTO_TIPO_PRODUCTO] FOREIGN KEY([IdTipoProducto])
+REFERENCES [dbo].[TIPO_PRODUCTO] ([IdTipoProducto])
+GO
+ALTER TABLE [dbo].[PRODUCTO] CHECK CONSTRAINT [FK_PRODUCTO_TIPO_PRODUCTO]
+GO
+/****** Object:  ForeignKey [FK_PUNTO_DE_VENTA_CIUDAD]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[PUNTO_DE_VENTA]  WITH NOCHECK ADD  CONSTRAINT [FK_PUNTO_DE_VENTA_CIUDAD] FOREIGN KEY([IdCiudad])
+REFERENCES [dbo].[CIUDAD] ([IdCiudad])
+GO
+ALTER TABLE [dbo].[PUNTO_DE_VENTA] CHECK CONSTRAINT [FK_PUNTO_DE_VENTA_CIUDAD]
+GO
+/****** Object:  ForeignKey [FK_PUNTO_DE_VENTA_USUARIO]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[PUNTO_DE_VENTA]  WITH NOCHECK ADD  CONSTRAINT [FK_PUNTO_DE_VENTA_USUARIO] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[USUARIO] ([IdUsuario])
+GO
+ALTER TABLE [dbo].[PUNTO_DE_VENTA] CHECK CONSTRAINT [FK_PUNTO_DE_VENTA_USUARIO]
+GO
+/****** Object:  ForeignKey [FK_USUARIO_PERFIL]    Script Date: 09/20/2015 08:47:56 ******/
+ALTER TABLE [dbo].[USUARIO]  WITH NOCHECK ADD  CONSTRAINT [FK_USUARIO_PERFIL] FOREIGN KEY([IdPerfil])
+REFERENCES [dbo].[PERFIL] ([IdPerfil])
+GO
+ALTER TABLE [dbo].[USUARIO] CHECK CONSTRAINT [FK_USUARIO_PERFIL]
+GO

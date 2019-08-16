@@ -1,0 +1,1 @@
+<center><img src="Images/Recursos1.jpg" alt="Recursos" width="100%"></center>
